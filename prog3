@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {
+        int n = nums.size(); 
+        vector<int> arr(n + 1, 0); 
+        vector<int> list;
+
+        // Iterate through each number in the input vector
+        for (int i : nums) {
+            if (++arr[i] > 1) // Increment the count for this number and check if it is now a duplicate
+                list.push_back(i); 
+        }
+
+        return list; 
+    }
+};
+
+int main() {
+    Solution solution;
+    vector<int> nums = {4, 3, 2, 7, 8, 2, 3, 1};
+    vector<int> duplicates = solution.findDuplicates(nums);
+    
+    // Print the duplicates
+    cout << "Duplicate elements are: ";
+    for (int num : duplicates) {
+        cout << num << " "; 
+    }
+    cout << endl;
+
+    return 0;
+}
