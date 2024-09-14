@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+
+int* findLeaders(int arr[], int n, int& lc) {
+    int* lead = new int[n];
+    int maxr = arr[n - 1];
+    lead[0] = maxr;
+    lc = 1;
+
+    for (int i = n - 2; i >= 0; i--) {
+        if (arr[i] > maxr) {
+            maxr = arr[i];
+            lead[lc] = maxr;
+            lc++;
+        }
+    }
+
+    for (int i = 0; i < lc / 2; i++) {
+        int temp = lead[i];
+        lead[i] = lead[lc - i - 1];
+        lead[lc - i - 1] = temp;
+    }
+
+    return lead;
+}
+
+int main() {
+    int arr[] = {16, 17, 4, 3, 5, 2};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int lc = 0;
+
+    int* lead = findLeaders(arr, n, lc);
+
+    cout << "Leaders: ";
+    for (int i = 0; i < lc; i++) {
+        cout << lead[i] << " ";
+    }
+    cout << endl;
+
+    delete[] lead;
+    return 0;
+}
